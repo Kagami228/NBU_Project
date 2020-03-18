@@ -13,9 +13,9 @@ class net: #сеть которой передали набор для обуч�
 	#						выворачиваем мозги, но понимаем(частично)
 	   numLayers = len(topology)#Размер вектора входящих данных
 	   for layerNum in range(numLayers):#Грубо говоря, по размеру вектора пошли, layerNum- от
-           self.layers.append(Layer())# в вектор (вектора нейронов) добавляем ещё вектор нейронов 
+           	self.layers.append(Layer())# в вектор (вектора нейронов) добавляем ещё вектор нейронов 
            if( layerNum == len(topology) - 1):
-			   numOutputs=0
+	       numOutputs=0
            else:
                umOutputs=topology[layerNum + 1]#если layerNum == размеру входного вектора данных ((topology.size()-1)), то numOutputs=0, иначе _topology[layerNum + 1]
                for neuronNum in range(topology[layerNum]):# от нуля по размеру topology[layerNum], neuronNum отсчётное значение
@@ -32,33 +32,33 @@ class net: #сеть которой передали набор для обуч�
 			prevLayer = self.layers[layerNum - 1]# предыдущий слой
 			
 			for n in range(len(self.layers[layerNum]) - 1):# по слоям
-			 self.layers[layerNum][n].feedForward(prevLayer)# подаём вперёд
+			    self.layers[layerNum][n].feedForward(prevLayer)# подаём вперёд
 
 	def backProp(self,targetVals):#задняя опора(Или обратное распространение)
 	#Обратное распростронение, если я правильно понимаю
 	    outputLayer = self.layers[-1]#ссылка на последний элемент вектора layers // Выходной слой
-        error = 0.0# обозначение ошибки 
-        for n in range(len(outputLayer - 1)): #проход от 0 до outputLayer
-            delta = targetVals[n] - outputLayer[n].getOutputVal()# высчитываем delta
-            error += delta * delta#теперь ошибку
-            error /= len(outputLayer) - 1#ошибка
-	 error = sqrt(error)# квадратичное
+            error = 0.0# обозначение ошибки 
+            for n in range(len(outputLayer - 1)): #проход от 0 до outputLayer
+                delta = targetVals[n] - outputLayer[n].getOutputVal()# высчитываем delta
+                error += delta * delta#теперь ошибку
+                error /= len(outputLayer) - 1#ошибка
+	    error = sqrt(error)# квадратичное
 
-	 recentAverageError =(recentAverageError * recentAverageSmoothingFactor + error)/(recentAverageSmoothingFactor + 1.0)#Чистая средняя ошибка 
+	    recentAverageError =(recentAverageError * recentAverageSmoothingFactor + error)/(recentAverageSmoothingFactor + 1.0)#Чистая средняя ошибка 
 
-	 for n  in range(len(outputLayer - 1)):#до размера выходного слоя
-		outputLayer[n].calcOutputGradients(targetVals[n])# Высчитываем Градиент
+	    for n  in range(len(outputLayer - 1)):#до размера выходного слоя
+	   	outputLayer[n].calcOutputGradients(targetVals[n])# Высчитываем Градиент
 
-	 layerNum=len(self.layers)-2
-	 for layerNum in range(layerNum,0):# Пройдёмся от layers.size() - 2 до 0.
-		hiddenLayer = self.layers[layerNum]#Нейронны скрытого слоя
+	    layerNum=len(self.layers)-2
+	    for layerNum in range(layerNum,0):# Пройдёмся от layers.size() - 2 до 0.
+	 	hiddenLayer = self.layers[layerNum]#Нейронны скрытого слоя
 		nextLayer = self.layers[layerNum + 1]#Нейроны следуйщего слоя
 
 		for n in range(len(hiddenLayer)):#пойдём по скрытому слою
 			hiddenLayer[n].calcHiddenGradients(nextLayer)#считаем градиент для каждого нейрона в скрытом слое
 			
 		layerNum=len(self.layers)-1
-        for layerNum in range(layerNum,0):#Опять по слою
+            for layerNum in range(layerNum,0):#Опять по слою
 		 layer = layers[layerNum];#слой
 		 prevLayer = layers[layerNum - 1];#Предыдущий слой
 		 
@@ -67,8 +67,8 @@ class net: #сеть которой передали набор для обуч�
 	
 	def getResults(self,resultVals):#получить результаты
 		#Выбираем ответ из сети Нейронов
-		resultVals.clear()#Очищаем  
-        for n in range(len(self.layers[-1]- 1)):# по размеру Нейронной Сети
+	    resultVals.clear()#Очищаем  
+            for n in range(len(self.layers[-1]- 1)):# по размеру Нейронной Сети
 		    resultVals.append(self.layers[-1][n].getOutputVal())#закидываем ответы
-        getRecentAverageError() 
-        return recentAverageError #получить недавнюю среднюю ошибку  ... /Чистая средняя ошибка 
+            getRecentAverageError() 
+            return recentAverageError #получить недавнюю среднюю ошибку  ... /Чистая средняя ошибка 
