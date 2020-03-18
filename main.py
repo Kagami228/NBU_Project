@@ -10,11 +10,12 @@ def showVectorVals(label , v):
     print(str)
 
 trainingSet trainingData("testData.txt")# Обучаюзий набор из txt
-list<unsigned> topology#вектор 
+topology=[]#вектор 
 trainingData.getTopology(topology)#заполнить вектор topology
 net net(topology)#сеть вектора
-
-list<double> inputVals, targetVals, resultVals#входное значение, целевое значение, Значение результата
+inputVals=[]
+targetVals=[]
+resultVals=[]#входное значение, целевое значение, Значение результата
 
 trainingPass = 0#Тренировочный проход
 
