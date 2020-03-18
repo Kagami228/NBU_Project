@@ -11,8 +11,8 @@ class trainingSet(object):
         f = open(self.trainingDataFile)
         if(self.isEOF() and f.compare("topology:")!=0):
             os.abort()
-        while(!f.isEOF):
-            f.line()=n
+        while (not f.isEOF):
+            f.line=n
             topology.append(n)
         return
     def getNextInputs(self,inputVals):
