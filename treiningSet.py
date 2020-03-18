@@ -1,5 +1,5 @@
 
-class trainingSet(object):
+class trainingSet(object):)
     trainingDataFile
     def __init__(self,name):
         self.trainingDataFile.open(str(name))
