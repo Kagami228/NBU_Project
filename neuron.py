@@ -76,3 +76,5 @@ class Connection(object):
     def __init__(self,weight,deltaWeight):
         self.deltaWeight=deltaWeight
         self.weight=weight
+
+        
