@@ -1,3 +1,4 @@
+
 class trainingSet(object):
     trainingDataFile
     def __init__(self,name):
